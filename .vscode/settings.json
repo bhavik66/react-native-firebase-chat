@@ -1,0 +1,9 @@
+{
+  "[javascript]": {
+    "editor.formatOnSave": true
+  },
+  "prettier.singleQuote": true,
+  "prettier.semi": false,
+  "editor.tabSize": 2,
+  "editor.autoIndent": true
+}
