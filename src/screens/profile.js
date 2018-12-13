@@ -26,11 +26,6 @@ export default class Profile extends Component {
       isFromFile: false
     }
     this.size = new Animated.Value(150)
-
-    this.props.User.checkForExisting(user => {
-      this._name = user.name
-      this._avatar = user.avatar
-    })
   }
 
   componentWillMount() {
@@ -47,6 +42,10 @@ export default class Profile extends Component {
   componentWillUnmount() {
     this.keyboardWillShowSub.remove()
     this.keyboardWillHideSub.remove()
+  }
+
+  componentDidMount() {
+    this.props.User.getCurrentUser()
   }
 
   keyboardWillShow = event => {
@@ -96,14 +95,20 @@ export default class Profile extends Component {
           <TouchableOpacity
             style={style.footerButton}
             onPress={async () => {
-              if (this._name === this.props.User.name) {
-                //TO DO
+              this.setState({ isLoading: true })
+              if (this.props.User.key === '') {
+                this.props.User.save().then(userKey => {
+                  saveKey(userKey).then(() => {
+                    this.props.navigation.replace('Splash')
+                  })
+                })
+              } else {
+                this.props.User.update().then(data => {
+                  saveKey(this.props.User.key).then(() => {
+                    this.props.navigation.replace('Splash')
+                  })
+                })
               }
-              // this.setState({ isLoading: true })
-              // const userKey = await this.props.User.signUpUser()
-              // saveKey(userKey).then(() =>
-              //   this.props.navigation.replace('Splash')
-              // )
             }}
           >
             <Text style={style.footerButtonText}>Continue</Text>
@@ -124,6 +129,7 @@ export default class Profile extends Component {
       } else {
         this.props.User.avatarSource = response.path
         this.props.User.fileName = response.fileName
+        this.setState({ isFromFile: true + 9190 })
       }
     })
   }

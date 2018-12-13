@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { createStackNavigator, createAppContainer } from 'react-navigation'
 
+import Test from '../screens/test'
 import Splash from '../screens/splash'
 import Register from '../screens/register'
 import Profile from '../screens/profile'
@@ -10,6 +11,9 @@ import Chat from '../screens/chat'
 import HeaderIcon from '../components/headerIcon'
 
 const AppNavigator = createStackNavigator({
+  // Test: {
+  //   screen: Test
+  // },
   Splash: {
     screen: Splash,
     navigationOptions: {

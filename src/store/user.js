@@ -4,12 +4,18 @@ import firebase from 'react-native-firebase'
 import { getFileName } from '../utils/utils'
 
 class User {
+  constructor() {
+    this.database = firebase.database()
+  }
+
   @observable
   key = ''
   @observable
   name = ''
   @observable
   avatarSource = ''
+  @observable
+  avatarRef = ''
   @observable
   fileName = ''
 
@@ -42,76 +48,89 @@ class User {
   }
 
   @action
-  async checkForExisting(callback) {
+  async getCurrentUser() {
     let key = undefined
-    const database = firebase.database()
-    const user = {
-      phoneNumber: '',
-      name: '',
-      avatar: '',
-      avatarRef: ''
-    }
-    user.phoneNumber = this.phoneNumber
-    user.name = this.name
-    let snapshot
-
-    if (!this.key) {
-      snapshot = await database
+    if (this.key) {
+      key = this.key
+    } else {
+      const snapshot = await firebase
+        .database()
         .ref('PhoneNumber')
         .once('value', this.phoneNumber)
       if (snapshot.val() != null) {
         key = snapshot.val()[this.phoneNumber]
         if (key === undefined) return
       }
-    } else {
-      key = this.key
     }
-    const userSnapshot = await database
+    const userSnapshot = await this.database
       .ref('Users')
       .child(key)
       .once('value')
     const _user = userSnapshot.val()
-    callback(_user)
+    if (_user) {
+      this.name = _user.name
+      this.avatarSource = _user.avatarSource
+      this.avatarRef = _user.avatarRef
+      this.phoneNumber = _user.phoneNumber
+      this.key = key
+    }
   }
 
   @action
-  async signUpUser(isUpdateName, isUpdateImage) {
-    try {
-      this.checkForExisting(_user => {
-        if (isUpdateImage) {
-          await firebase
-            .storage()
-            .ref(_user.avatarRef)
-            .delete()
-          const rImage = await firebase
-            .storage()
-            .ref('/profilePics/' + getFileName(this.fileName))
-            .putFile(imageUri)
-          user.avatar = rImage.downloadURL
-          user.avatarRef = rImage.ref
-        }
-      })
-
-      if (key !== undefined) {
-        await database
-          .ref('Users')
-          .child(key)
-          .set(user)
-      } else {
-        key = await database.ref('Users').push(user).key
-        await firebase
-          .database()
-          .ref('PhoneNumber')
-          .child(this.phoneNumber)
-          .set(key)
-      }
-
-      // dispatch({ type: SIGNUP_SUCCESS, key })
-      return Promise.resolve(key)
-    } catch (error) {
-      // dispatch({ type: ERROR, message: error })
-      return Promise.reject()
+  async save() {
+    const imgData = await this.imageUpload()
+    const user = {
+      name: this.name,
+      phoneNumber: this.phoneNumber,
+      avatarSource: imgData.avatarSource,
+      avatarRef: imgData.avatarRef
     }
+
+    const key = await this.database.ref('Users').push(user).key
+    await this.database
+      .ref('PhoneNumber')
+      .child(this.phoneNumber)
+      .set(key)
+    return key
+  }
+
+  @action
+  async update() {
+    const imgData = await this.imageUpload()
+    const user = {
+      name: this.name,
+      phoneNumber: this.phoneNumber,
+      avatarSource: imgData.avatarSource,
+      avatarRef: imgData.avatarRef
+    }
+    await this.database
+      .ref('Users')
+      .child(this.key)
+      .set(user)
+  }
+
+  async imageUpload() {
+    let data = {
+      avatarSource: this.avatarSource,
+      avatarRef: this.avatarRef
+    }
+    if (this.fileName !== '') {
+      if (this.avatarRef !== '') {
+        await firebase
+          .storage()
+          .ref(this.avatarRef)
+          .delete()
+      }
+      const rImage = await firebase
+        .storage()
+        .ref('/profilePics/' + getFileName(this.fileName))
+        .putFile(this.avatarSource)
+      data = {
+        avatarSource: rImage.downloadURL,
+        avatarRef: rImage.ref
+      }
+    }
+    return data
   }
 }
 

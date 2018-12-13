@@ -18,8 +18,8 @@ export default class Register extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      phoneNumber: '',
-      verificationCode: ''
+      phoneNumber: '+919033090059',
+      verificationCode: '123456'
     }
     this.screenWidth = Dimensions.get('window').width
   }
