@@ -23,17 +23,19 @@ export default class MsgBar extends Component {
           underlineColorAndroid={'transparent'}
           onChangeText={text => this.setState({ text: text })}
           value={this.state.text}
+          placeholder={'Type here..'}
         />
         <TouchableOpacity style={style.sendIcon} onPress={this.onSend}>
-          <Icon name={'send'} color={colors.primary} size={32} />
+          <Icon name={'send'} color={colors.white} size={20} />
         </TouchableOpacity>
       </View>
     )
   }
 
   onSend = () => {
+    if (this.state.text.trim() === '') return
     const { conversationKey } = this.props
-    this.props.Chat.sendMessage(conversationKey, this.state.text)
+    this.props.Chat.sendMessage(conversationKey, this.state.text.trim())
     this.setState({ text: '' })
   }
 }

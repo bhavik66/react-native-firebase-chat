@@ -9,7 +9,10 @@ class Contact extends Component {
   render() {
     const { avatarUrl, name } = this.props
     return (
-      <TouchableOpacity style={styles.container} onPress={this.props.onPress}>
+      <TouchableOpacity
+        style={[styles.container, { paddingTop: 8, paddingBottom: 8 }]}
+        onPress={this.props.onPress}
+      >
         <Image source={avatarUrl} style={styles.avatar} />
         <View style={styles.content}>
           <Text style={styles.name}>{name}</Text>
@@ -25,6 +28,7 @@ Contact.defaultProps = {
 
 Contact.propTypes = {
   name: PropTypes.string.isRequired,
+  avatarUrl: PropTypes.object,
   lastMessage: PropTypes.string
 }
 

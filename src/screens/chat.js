@@ -1,19 +1,14 @@
 import React, { Component } from 'react'
-import { View, FlatList, Keyboard } from 'react-native'
+import { View, FlatList, Image, Dimensions } from 'react-native'
 
 import MsgBar from '../components/msgbar'
 import Message from '../components/message'
 import { observer, inject } from 'mobx-react'
+import { Header } from '../components/header'
 
 @inject('Chat')
 @observer
 export default class Chat extends Component {
-  static navigationOptions = ({ navigation }) => {
-    return {
-      title: navigation.state.params.title
-    }
-  }
-
   constructor(props) {
     super(props)
     this.state = {

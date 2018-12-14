@@ -14,7 +14,7 @@ export default class Root extends React.Component {
         <View style={{ flex: 1 }}>
           <StatusBar
             barStyle={'light-content'}
-            backgroundColor={colors.border}
+            backgroundColor={colors.primary}
           />
           <AppNavigator />
         </View>

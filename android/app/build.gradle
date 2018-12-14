@@ -148,6 +148,7 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-svg')
     compile project(':react-native-image-picker')
     implementation project(':react-native-vector-icons')
     implementation project(':react-native-firebase')

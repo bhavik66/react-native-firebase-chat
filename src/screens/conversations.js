@@ -3,8 +3,7 @@ import {
   View,
   FlatList,
   ActivityIndicator,
-  TouchableOpacity,
-  Text
+  TouchableOpacity
 } from 'react-native'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 import { inject, observer } from 'mobx-react'
@@ -68,10 +67,11 @@ export default class Conversations extends Component {
           renderItem={({ item }) => (
             <Conversation
               name={item.name}
-              avatarUrl={{ uri: item.avatar }}
+              avatarUrl={{ uri: item.avatarSource }}
               onPress={() =>
                 this.props.navigation.navigate('Chat', {
                   conversationKey: item.key,
+                  imageURL: item.avatarSource,
                   title: item.name
                 })
               }

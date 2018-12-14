@@ -38,7 +38,7 @@ export default class Contacts extends Component {
           renderItem={({ item }) => (
             <Contact
               name={item.name}
-              avatarUrl={{ uri: item.avatar }}
+              avatarUrl={{ uri: item.avatarSource }}
               onPress={() =>
                 this.props.Contact.startConversation(item.key).then(key => {
                   this.props.navigation.replace('Chat', {

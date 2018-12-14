@@ -1,35 +1,50 @@
 import { StyleSheet } from 'react-native'
-import color from '../colors'
+import { moderateScale } from 'react-native-size-matters'
 
 const style = StyleSheet.create({
-  container: {
-    margin: 4,
-    marginRight: 8,
-    marginLeft: 8
+  item: {
+    marginVertical: moderateScale(7, 2),
+    flexDirection: 'row'
   },
-  senderView: {
-    backgroundColor: color.primary,
+  itemIn: {
+    marginLeft: 20
+  },
+  itemOut: {
     alignSelf: 'flex-end',
-    padding: 8,
-    paddingRight: 12,
-    paddingLeft: 12,
-    borderRadius: 50
+    marginRight: 20
   },
-  senderText: {
-    color: color.white,
-    fontSize: 14
+  balloon: {
+    maxWidth: moderateScale(250, 2),
+    paddingHorizontal: moderateScale(10, 2),
+    paddingTop: moderateScale(5, 2),
+    paddingBottom: moderateScale(7, 2),
+    borderRadius: 20
   },
-  receiverView: {
-    backgroundColor: color.primary,
-    alignSelf: 'flex-start',
-    padding: 8,
-    paddingRight: 12,
-    paddingLeft: 12,
-    borderRadius: 50
+  arrowContainer: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    zIndex: -1,
+    flex: 1
   },
-  receiverText: {
-    color: color.white,
-    fontSize: 14
+  arrowLeftContainer: {
+    justifyContent: 'flex-end',
+    alignItems: 'flex-start'
+  },
+
+  arrowRightContainer: {
+    justifyContent: 'flex-end',
+    alignItems: 'flex-end'
+  },
+
+  arrowLeft: {
+    left: moderateScale(-6, 0.5)
+  },
+
+  arrowRight: {
+    right: moderateScale(-6, 0.5)
   }
 })
 

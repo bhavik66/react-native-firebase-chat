@@ -3,19 +3,20 @@ import colors from './colors'
 
 const style = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
+    marginTop: 42
   },
   content: {
     margin: 24
   },
   verifyText: {
-    fontSize: 22,
+    fontSize: 24,
     color: colors.text,
     fontWeight: 'bold'
   },
   smsText: {
     fontSize: 18,
-    color: colors.text,
+    color: 'rgb(91,82,121)',
     marginTop: 12
   },
   signinText: {
@@ -25,13 +26,15 @@ const style = StyleSheet.create({
     color: colors.primary,
     textDecorationLine: 'underline'
   },
-  footer: {
+  nextButton: {
     backgroundColor: colors.primary,
-    padding: 12,
-    position: 'absolute',
-    bottom: 0,
-    right: 0,
-    left: 0
+    padding: 14,
+    paddingRight: 22,
+    paddingLeft: 22,
+    marginTop: 46,
+    borderRadius: 100,
+    alignSelf: 'center',
+    elevation: 8
   },
   footerButton: {
     flexDirection: 'row',
@@ -40,7 +43,8 @@ const style = StyleSheet.create({
   },
   footerButtonText: {
     color: colors.white,
-    fontSize: 16
+    fontSize: 20,
+    fontWeight: '500'
   },
   textInput: {
     marginTop: 32,
@@ -59,7 +63,8 @@ const style = StyleSheet.create({
     backgroundColor: colors.primary,
     position: 'absolute',
     bottom: 24,
-    right: 24
+    right: 24,
+    elevation: 10
   }
 })
 

@@ -2,8 +2,14 @@ import { StyleSheet } from 'react-native'
 
 const styles = StyleSheet.create({
   container: {
-    height: 78,
-    flexDirection: 'row'
+    // height: 78,
+    flexDirection: 'row',
+    margin: 16,
+    backgroundColor: '#fff',
+    elevation: 10,
+    borderRadius: 8,
+    paddingTop: 4,
+    paddingBottom: 4
   },
   avatar: {
     width: 56,
@@ -15,6 +21,7 @@ const styles = StyleSheet.create({
   },
   content: {
     margin: 12,
+    marginLeft: 4,
     justifyContent: 'space-between'
   },
   name: {
@@ -24,7 +31,9 @@ const styles = StyleSheet.create({
     color: '#333'
   },
   lastMessage: {
-    marginBottom: 4
+    marginBottom: 4,
+    flex: 1,
+    flexWrap: 'wrap'
   }
 })
 

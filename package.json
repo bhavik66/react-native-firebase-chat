@@ -12,12 +12,17 @@
     "prop-types": "^15.6.2",
     "react": "16.6.1",
     "react-native": "0.57.7",
+    "react-native-animatable": "^1.3.0",
     "react-native-firebase": "^5.1.1",
     "react-native-gesture-handler": "^1.0.10",
-    "react-native-image-picker": "^0.27.1",
+    "react-native-image-picker": "^0.27.2",
     "react-native-phone-input": "^0.2.1",
+    "react-native-size-matters": "^0.1.4",
+    "react-native-svg": "^8.0.10",
     "react-native-vector-icons": "^6.1.0",
-    "react-navigation": "^3.0.2"
+    "react-native-view-shot": "^2.5.0",
+    "react-navigation": "^3.0.2",
+    "react-navigation-transitions": "^1.0.6"
   },
   "devDependencies": {
     "@babel/plugin-proposal-decorators": "^7.2.0",

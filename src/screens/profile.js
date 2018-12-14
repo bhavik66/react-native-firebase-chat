@@ -65,7 +65,10 @@ export default class Profile extends Component {
   render() {
     return (
       <View style={[style.container, _style.container]}>
-        <TouchableOpacity onPress={this.selectAvatar}>
+        <TouchableOpacity
+          style={[_style.avatar, { backgroundColor: '#fff', elevation: 15 }]}
+          onPress={this.selectAvatar}
+        >
           <Animated.Image
             style={[_style.avatar, { height: this.size, width: this.size }]}
             source={
@@ -87,35 +90,49 @@ export default class Profile extends Component {
           value={this.props.User.name}
         />
         {this.state.isLoading ? (
-          <ActivityIndicator size={'large'} color={colors.primary} />
+          <ActivityIndicator
+            size={'large'}
+            color={colors.primary}
+            style={{ margin: 24 }}
+          />
         ) : (
           <View />
         )}
-        <View style={style.footer}>
-          <TouchableOpacity
-            style={style.footerButton}
-            onPress={async () => {
-              this.setState({ isLoading: true })
-              if (this.props.User.key === '') {
-                this.props.User.save().then(userKey => {
-                  saveKey(userKey).then(() => {
-                    this.props.navigation.replace('Splash')
-                  })
-                })
-              } else {
-                this.props.User.update().then(data => {
-                  saveKey(this.props.User.key).then(() => {
-                    this.props.navigation.replace('Splash')
-                  })
-                })
-              }
-            }}
-          >
-            <Text style={style.footerButtonText}>Continue</Text>
+        <View
+          style={{
+            backgroundColor: colors.primary,
+            alignSelf: 'center',
+            padding: 8,
+            paddingRight: 32,
+            paddingLeft: 32,
+            borderRadius: 6
+          }}
+        >
+          <TouchableOpacity onPress={this.onSaveOrUpdate}>
+            <Text style={[style.footerButtonText, { fontWeight: '500' }]}>
+              Continue
+            </Text>
           </TouchableOpacity>
         </View>
       </View>
     )
+  }
+
+  onSaveOrUpdate = () => {
+    this.setState({ isLoading: true })
+    if (this.props.User.key === '') {
+      this.props.User.save().then(userKey => {
+        saveKey(userKey).then(() => {
+          this.props.navigation.replace('Splash')
+        })
+      })
+    } else {
+      this.props.User.update().then(data => {
+        saveKey(this.props.User.key).then(() => {
+          this.props.navigation.replace('Splash')
+        })
+      })
+    }
   }
 
   selectAvatar = () => {
@@ -146,12 +163,13 @@ const _style = StyleSheet.create({
     alignSelf: 'center'
   },
   textInput: {
+    backgroundColor: colors.white,
     margin: 32,
     padding: 8,
     borderColor: colors.border,
-    borderWidth: 1,
-    borderRadius: 50,
+    borderRadius: 6,
     textAlign: 'center',
-    fontSize: 18
+    fontSize: 18,
+    elevation: 6
   }
 })
