@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
-import { View, Text, Image, TouchableOpacity } from 'react-native'
-
+import { View, Text, TouchableOpacity } from 'react-native'
 import PropTypes from 'prop-types'
 
+import ProgressiveImage from './progressiveImage'
 import styles from '../theme/component/conversation'
 
 class Contact extends Component {
@@ -13,7 +13,11 @@ class Contact extends Component {
         style={[styles.container, { paddingTop: 8, paddingBottom: 8 }]}
         onPress={this.props.onPress}
       >
-        <Image source={avatarUrl} style={styles.avatar} />
+        <ProgressiveImage
+          source={avatarUrl}
+          style={styles.avatar}
+          thumbnail={require('../img/profile.png')}
+        />
         <View style={styles.content}>
           <Text style={styles.name}>{name}</Text>
         </View>

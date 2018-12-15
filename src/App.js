@@ -1,11 +1,12 @@
 import React from 'react'
-import { View, StatusBar, ActivityIndicator } from 'react-native'
+import { View, StatusBar } from 'react-native'
 
 import { Provider } from 'mobx-react'
 
 import AppNavigator from './layout/index'
 import colors from './theme/colors'
 import stores from './store'
+import './utils/enableFontPatch'
 
 export default class Root extends React.Component {
   render() {

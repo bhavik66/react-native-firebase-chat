@@ -5,6 +5,8 @@ const styles = StyleSheet.create({
     // height: 78,
     flexDirection: 'row',
     margin: 16,
+    marginTop: 2,
+    marginBottom: 10,
     backgroundColor: '#fff',
     elevation: 10,
     borderRadius: 8,

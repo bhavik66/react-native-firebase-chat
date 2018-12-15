@@ -27,6 +27,12 @@ export default class Chat {
       .child(key)
       .child('lastMsg')
       .set(messageKey)
+
+    await this.database
+      .ref('Conversations')
+      .child(key)
+      .child('lastTime')
+      .set(message.timeStamp)
   }
 
   @action

@@ -15,25 +15,8 @@ import colors from '../theme/colors'
 @inject('Conversation')
 @observer
 export default class Conversations extends Component {
-  constructor(props) {
-    super(props)
-    this.willFocusSubscription = null
-    this.didBlurSubscription = null
-    this.isActiveted = false
-  }
-
   componentWillMount() {
-    this.willFocusSubscription = this.props.navigation.addListener(
-      'willFocus',
-      payload => {
-        this.props.Conversation.fetchConversations(!this.isActiveted)
-        this.isActiveted = true
-      }
-    )
-  }
-
-  componentWillUnmount() {
-    this.willFocusSubscription.remove()
+    this.props.Conversation.fetchConversations()
   }
 
   render() {

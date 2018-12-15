@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
-import { View, Image, Text, TouchableOpacity } from 'react-native'
+import { View, Text, TouchableOpacity } from 'react-native'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 
+import ProgressiveImage from './progressiveImage'
 import colors from '../theme/colors'
 
 export const ChatHeader = props => {
@@ -21,18 +22,24 @@ export const ChatHeader = props => {
       <TouchableOpacity onPress={() => props.nav.goBack()}>
         <Icon name={'arrow-back'} color={colors.white} size={28} />
       </TouchableOpacity>
-      <Image
-        source={{ uri: props.uri }}
+      <View
         style={{
-          width: 42,
-          height: 42,
-          borderRadius: 100,
           margin: 4,
-          marginRight: 16,
-          marginLeft: 16,
-          borderWidth: 1
+          marginRight: 12,
+          marginLeft: 12
         }}
-      />
+      >
+        <ProgressiveImage
+          source={{ uri: props.uri }}
+          style={{
+            width: 42,
+            height: 42,
+            borderRadius: 100,
+            borderWidth: 1
+          }}
+          thumbnail={require('../img/profile.png')}
+        />
+      </View>
       <Text style={{ color: colors.white, fontSize: 20, fontWeight: '500' }}>
         {props.title}
       </Text>

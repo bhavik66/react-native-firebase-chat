@@ -16,26 +16,31 @@ export default class Conversations {
   isLoading = false
 
   @action
-  async fetchConversations(isShowLoader) {
-    this.isLoading = isShowLoader ? true : false
-    const snapshot = await this.database
+  async fetchConversations() {
+    this.isLoading = true
+    await this.database
       .ref('Conversations')
       .orderByChild(this.key)
       .equalTo(true)
-      .once('value')
+      .on('value', snapshot => {
+        let conversations = []
+        let promises = []
 
-    let conversations = []
-    let promises = []
+        snapshot.forEach(item => {
+          promises.push(this.loadUserData(item, this.key))
+        })
 
-    snapshot.forEach(item => {
-      promises.push(this.loadUserData(item, this.key))
-    })
-
-    Promise.all(promises).then(data => {
-      data.forEach(item => conversations.push(item))
-      this.conversations = conversations
-      this.isLoading = false
-    })
+        Promise.all(promises).then(data => {
+          data.forEach(item => conversations.push(item))
+          conversations.sort((a, b) => {
+            console.log(a.lastTime)
+            return b.lastTime - a.lastTime
+          })
+          console.log(conversations)
+          this.conversations = conversations
+          this.isLoading = false
+        })
+      })
   }
 
   loadUserData(item, userkey) {
@@ -54,7 +59,8 @@ export default class Conversations {
             .once('value')
           const data = {
             key: item.key,
-            lastMessage: lastMsg.val().text,
+            lastTime: item.val().lastTime,
+            lastMessage: lastMsg.val() ? lastMsg.val().text : '',
             ...user.val()
           }
           resolve(data)

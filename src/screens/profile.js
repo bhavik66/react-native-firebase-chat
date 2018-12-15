@@ -12,6 +12,7 @@ import {
 import ImagePicker from 'react-native-image-picker'
 import { inject, observer } from 'mobx-react'
 
+import ProgressiveImage from '../components/progressiveImage'
 import style from '../theme/index'
 import colors from '../theme/colors'
 import { saveKey } from '../utils/db'
@@ -25,42 +26,42 @@ export default class Profile extends Component {
       isLoading: false,
       isFromFile: false
     }
-    this.size = new Animated.Value(150)
+    // this.size = new Animated.Value(150)
   }
 
-  componentWillMount() {
-    this.keyboardWillShowSub = Keyboard.addListener(
-      'keyboardDidShow',
-      this.keyboardWillShow
-    )
-    this.keyboardWillHideSub = Keyboard.addListener(
-      'keyboardDidHide',
-      this.keyboardWillHide
-    )
-  }
+  // componentWillMount() {
+  //   this.keyboardWillShowSub = Keyboard.addListener(
+  //     'keyboardDidShow',
+  //     this.keyboardWillShow
+  //   )
+  //   this.keyboardWillHideSub = Keyboard.addListener(
+  //     'keyboardDidHide',
+  //     this.keyboardWillHide
+  //   )
+  // }
 
-  componentWillUnmount() {
-    this.keyboardWillShowSub.remove()
-    this.keyboardWillHideSub.remove()
-  }
+  // componentWillUnmount() {
+  //   this.keyboardWillShowSub.remove()
+  //   this.keyboardWillHideSub.remove()
+  // }
 
   componentDidMount() {
     this.props.User.getCurrentUser()
   }
 
-  keyboardWillShow = event => {
-    Animated.timing(this.size, {
-      duration: 100,
-      toValue: 75
-    }).start()
-  }
+  // keyboardWillShow = event => {
+  //   Animated.timing(this.size, {
+  //     duration: 100,
+  //     toValue: 75
+  //   }).start()
+  // }
 
-  keyboardWillHide = event => {
-    Animated.timing(this.size, {
-      duration: 100,
-      toValue: 150
-    }).start()
-  }
+  // keyboardWillHide = event => {
+  //   Animated.timing(this.size, {
+  //     duration: 100,
+  //     toValue: 150
+  //   }).start()
+  // }
 
   render() {
     return (
@@ -69,8 +70,8 @@ export default class Profile extends Component {
           style={[_style.avatar, { backgroundColor: '#fff', elevation: 15 }]}
           onPress={this.selectAvatar}
         >
-          <Animated.Image
-            style={[_style.avatar, { height: this.size, width: this.size }]}
+          <ProgressiveImage
+            style={[_style.avatar]}
             source={
               this.props.User.avatarSource !== ''
                 ? {
@@ -80,6 +81,7 @@ export default class Profile extends Component {
                   }
                 : require('../img/profile.png')
             }
+            thumbnail={require('../img/profile.png')}
           />
         </TouchableOpacity>
         <TextInput
@@ -96,24 +98,23 @@ export default class Profile extends Component {
             style={{ margin: 24 }}
           />
         ) : (
-          <View />
+          <View
+            style={{
+              backgroundColor: colors.primary,
+              alignSelf: 'center',
+              padding: 8,
+              paddingRight: 32,
+              paddingLeft: 32,
+              borderRadius: 6
+            }}
+          >
+            <TouchableOpacity onPress={this.onSaveOrUpdate}>
+              <Text style={[style.footerButtonText, { fontWeight: '500' }]}>
+                Continue
+              </Text>
+            </TouchableOpacity>
+          </View>
         )}
-        <View
-          style={{
-            backgroundColor: colors.primary,
-            alignSelf: 'center',
-            padding: 8,
-            paddingRight: 32,
-            paddingLeft: 32,
-            borderRadius: 6
-          }}
-        >
-          <TouchableOpacity onPress={this.onSaveOrUpdate}>
-            <Text style={[style.footerButtonText, { fontWeight: '500' }]}>
-              Continue
-            </Text>
-          </TouchableOpacity>
-        </View>
       </View>
     )
   }
