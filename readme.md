@@ -4,9 +4,11 @@
 
 # React Native Firebase Chat
 
+[![Build Status][ico-travis]][link-travis]
 [![React Native][react_native-badge]][react_native-url]
 [![Android Platform][android_platform-badge]][android_platform-url]
 [![Android Studio][android_studio-badge]][android_studio-url]
+[![Codebeat][codebeat-badge]][codebeat-url]
 
 React Native chat application using Firebase backend. 
 
@@ -31,15 +33,8 @@ BinBytes is an mobile & web application development agency in Rajkot, India. You
 
 ### Mandatory
 - Install [Android Studio](https://developer.android.com/studio/index.html) and create an emulator.
-- Install [Homebrew](https://brew.sh/).
 - Install [Node](https://nodejs.org), [Watchman](https://facebook.github.io/watchman/) and [React Native](https://facebook.github.io/react-native/).
 
-```
-brew update
-brew install node
-brew install watchman
-npm install -g react-native-cli
-```
 
 ### Optional
 - Install [VS Code](https://code.visualstudio.com/) and follow extensions: `prettier`
@@ -88,3 +83,7 @@ MIT License. Please see the [license file](LICENSE.md) for more information.
 [android_platform-url]: https://developer.android.com/index.html
 [android_studio-badge]: https://img.shields.io/badge/Android%20Studio-3.2.1+-green.svg
 [android_studio-url]: https://developer.android.com/studio/install
+[codebeat-badge]: https://codebeat.co/badges/f22bd54a-d944-440d-aa4d-3a99f79b41d3
+[codebeat-url]: https://codebeat.co/projects/github-com-binbytes-react-native-firebase-chat-master
+[ico-travis]: https://img.shields.io/travis/binbytes/laravel-model-media-backup/master.svg?style=flat-square
+[link-travis]: https://travis-ci.org/binbytes/react-native-firebase-chat
