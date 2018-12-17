@@ -4,8 +4,6 @@ import {
   Text,
   TouchableOpacity,
   TextInput,
-  Animated,
-  Keyboard,
   ActivityIndicator,
   StyleSheet
 } from 'react-native'
@@ -26,42 +24,11 @@ export default class Profile extends Component {
       isLoading: false,
       isFromFile: false
     }
-    // this.size = new Animated.Value(150)
   }
-
-  // componentWillMount() {
-  //   this.keyboardWillShowSub = Keyboard.addListener(
-  //     'keyboardDidShow',
-  //     this.keyboardWillShow
-  //   )
-  //   this.keyboardWillHideSub = Keyboard.addListener(
-  //     'keyboardDidHide',
-  //     this.keyboardWillHide
-  //   )
-  // }
-
-  // componentWillUnmount() {
-  //   this.keyboardWillShowSub.remove()
-  //   this.keyboardWillHideSub.remove()
-  // }
 
   componentDidMount() {
     this.props.User.getCurrentUser()
   }
-
-  // keyboardWillShow = event => {
-  //   Animated.timing(this.size, {
-  //     duration: 100,
-  //     toValue: 75
-  //   }).start()
-  // }
-
-  // keyboardWillHide = event => {
-  //   Animated.timing(this.size, {
-  //     duration: 100,
-  //     toValue: 150
-  //   }).start()
-  // }
 
   render() {
     return (
@@ -128,7 +95,7 @@ export default class Profile extends Component {
         })
       })
     } else {
-      this.props.User.update().then(data => {
+      this.props.User.update().then(() => {
         saveKey(this.props.User.key).then(() => {
           this.props.navigation.replace('Splash')
         })
@@ -139,11 +106,11 @@ export default class Profile extends Component {
   selectAvatar = () => {
     ImagePicker.showImagePicker(null, response => {
       if (response.didCancel) {
-        console.log('User cancelled image picker')
+        // console.log('User cancelled image picker')
       } else if (response.error) {
-        console.log('ImagePicker Error: ', response.error)
+        // console.log('ImagePicker Error: ', response.error)
       } else if (response.customButton) {
-        console.log('User tapped custom button: ', response.customButton)
+        // console.log('User tapped custom button: ', response.customButton)
       } else {
         this.props.User.avatarSource = response.path
         this.props.User.fileName = response.fileName

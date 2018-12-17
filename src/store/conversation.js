@@ -16,9 +16,9 @@ export default class Conversations {
   isLoading = false
 
   @action
-  async fetchConversations() {
+  fetchConversations() {
     this.isLoading = true
-    await this.database
+    this.database
       .ref('Conversations')
       .orderByChild(this.key)
       .equalTo(true)
@@ -33,10 +33,8 @@ export default class Conversations {
         Promise.all(promises).then(data => {
           data.forEach(item => conversations.push(item))
           conversations.sort((a, b) => {
-            console.log(a.lastTime)
             return b.lastTime - a.lastTime
           })
-          console.log(conversations)
           this.conversations = conversations
           this.isLoading = false
         })
@@ -44,7 +42,7 @@ export default class Conversations {
   }
 
   loadUserData(item, userkey) {
-    return new Promise(async (resolve, reject) => {
+    return new Promise(async resolve => {
       const lastMsg = await this.database
         .ref('Messages')
         .child(item.key)

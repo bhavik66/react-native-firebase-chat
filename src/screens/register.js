@@ -39,7 +39,7 @@ export default class Register extends Component {
           animation={'flipInX'}
         >
           <Text style={style.verifyText}>Verify your number</Text>
-          <Text style={style.smsText}>You'll get a code via SMS</Text>
+          <Text style={style.smsText}>{"You'll get a code via SMS"}</Text>
           <PhoneInput
             ref={instance => (this.phone = instance)}
             style={{
@@ -59,7 +59,7 @@ export default class Register extends Component {
             textProps={{
               value: this.state.phoneNumber
             }}
-            onSelectCountry={country =>
+            onSelectCountry={() =>
               this.setState({ countryCode: this.phone.getCountryCode() })
             }
           />
@@ -79,7 +79,7 @@ export default class Register extends Component {
   }
 
   sendOTP() {
-    this.content.flipOutX(400).then(async endState => {
+    this.content.flipOutX(400).then(async () => {
       const _phoneNumber = '+' + this.state.countryCode + this.state.phoneNumber
       const isConfirm = await this.props.User.auth(_phoneNumber)
       if (isConfirm) {

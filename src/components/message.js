@@ -6,7 +6,6 @@ import { moderateScale } from 'react-native-size-matters'
 import { inject } from 'mobx-react'
 
 import styles from '../theme/component/message'
-import colors from '../theme/colors'
 
 @inject('Chat')
 export default class Message extends Component {

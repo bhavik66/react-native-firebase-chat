@@ -1,10 +1,9 @@
 import React, { Component } from 'react'
-import { View, FlatList, Image, Dimensions } from 'react-native'
+import { View, FlatList } from 'react-native'
 
 import MsgBar from '../components/msgbar'
 import Message from '../components/message'
 import { observer, inject } from 'mobx-react'
-import { Header } from '../components/header'
 
 @inject('Chat')
 @observer

@@ -45,6 +45,7 @@ class User {
         return false
       }
     }
+    return false
   }
 
   @action
@@ -57,7 +58,7 @@ class User {
         .database()
         .ref('PhoneNumber')
         .once('value', this.phoneNumber)
-      if (snapshot.val() != null) {
+      if (snapshot.val() !== null) {
         key = snapshot.val()[this.phoneNumber]
         if (key === undefined) return
       }

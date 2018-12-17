@@ -32,7 +32,7 @@ export default class Verify extends Component {
   }
 
   handleBackPress = () => {
-    this.content.flipOutX(400).then(endState => {
+    this.content.flipOutX(400).then(() => {
       this.props.navigation.replace('Register')
     })
     return true

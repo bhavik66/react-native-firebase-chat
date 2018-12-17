@@ -52,7 +52,7 @@ export default class Contact {
         item.forEach(subItem => {
           if (subItem.key === receiver) {
             key = item.key
-            return
+            break
           }
         })
       })

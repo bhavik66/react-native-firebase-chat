@@ -2,7 +2,6 @@ import React from 'react'
 import { createStackNavigator, createAppContainer } from 'react-navigation'
 import { fromRight, fromTop } from 'react-navigation-transitions'
 
-import Test from '../screens/test'
 import Splash from '../screens/splash'
 import Register from '../screens/register'
 import Verify from '../screens/verify'
@@ -13,11 +12,15 @@ import Chat from '../screens/chat'
 import { Header } from '../components/header'
 import { ChatHeader } from '../components/chatHeader'
 
+const handleCustomTransition = ({ scenes }) => {
+  if (scenes[scenes.length - 1].route.routeName === 'Contact') return null
+  if (scenes[scenes.length - 1].route.routeName === 'Profile')
+    return fromTop(800)
+  return fromRight(500)
+}
+
 const AppNavigator = createStackNavigator(
   {
-    // Test: {
-    //   screen: Test
-    // },
     Splash: {
       screen: Splash,
       navigationOptions: {
@@ -86,12 +89,5 @@ const AppNavigator = createStackNavigator(
     transitionConfig: nav => handleCustomTransition(nav)
   }
 )
-
-const handleCustomTransition = ({ scenes }) => {
-  if (scenes[scenes.length - 1].route.routeName === 'Contact') return null
-  if (scenes[scenes.length - 1].route.routeName === 'Profile')
-    return fromTop(800)
-  return fromRight(500)
-}
 
 export default createAppContainer(AppNavigator)
